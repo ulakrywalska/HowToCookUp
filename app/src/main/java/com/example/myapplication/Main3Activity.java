@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,7 +19,7 @@ public class Main3Activity extends AppCompatActivity {
     ArrayList<String> ProductList2 = new ArrayList<String>();
     public void ClickFunction2(View view) {
         int tmp=0;
-        mSQLiteHelper = new DataBase(this, "RECORDDB.sqlite", null, 1);
+        mSQLiteHelper = new DataBase(null, null , null, 3, null);
         mSQLiteHelper.setupDatabase();
         EditText product2 = (EditText) findViewById(R.id.editText);//nazwa
         EditText product3 = (EditText) findViewById(R.id.editText3);//skladnik

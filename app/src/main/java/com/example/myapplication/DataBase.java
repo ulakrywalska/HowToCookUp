@@ -7,17 +7,28 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
-import java.text.ParseException;
+import androidx.annotation.Nullable;
+
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
-    public class DataBase extends SQLiteOpenHelper{
+public class DataBase extends SQLiteOpenHelper{
 
-        public static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public DataBase(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, Context context1) {
+        super(context, name, factory, version);
+        this.context = context;
+    }
 
-        DataBase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
-            super(context, name, factory, version);
-        }
+    private Context context;
+    static final String name = "nazwa";
+    private static final int factory = 2;
+    static final int version = 3;
+
+    public static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //public static int DATABASE_VERSION =3;
+        //public static final String DATABASE_NAME = "table";
+        //DataBase(){
+            //super(context, name, factory, version);
+        //}
         public void setupDatabase(){
             SQLiteDatabase database = getWritableDatabase();
 //            String sql = "CREATE TABLE IF NOT EXISTS PRZEPISY(" +
@@ -116,6 +127,12 @@ import java.util.Calendar;
         public Cursor getData(String sql){
             SQLiteDatabase database = getReadableDatabase();
             return database.rawQuery(sql, null);
+        }
+
+        public void asyncUpdate(){
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("DROP TABLE IF EXISTS " + DataBase.name);
+            onCreate(db);
         }
 
         @Override

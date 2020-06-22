@@ -1,7 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 openMain5Activity();
             }
         });
+        new DataBaseAsync();
 
 }
     public void openMain5Activity(){
